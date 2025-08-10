@@ -19,28 +19,30 @@ Generate a downloadable reviewed .docx file and a JSON report summarizing findin
 Installation
 
 Clone the Repository:
-git clone https://github.com/your-username/corporate-agent.git
-cd corporate-agent
 
+    git clone https://github.com/your-username/corporate-agent.git
+    cd corporate-agent
 
 Set Up a Virtual Environment:
-python -m venv myenv
-myenv\Scripts\activate  # On Windows
-source myenv/bin/activate  # On macOS/Linux
+
+    python -m venv myenv
+    myenv\Scripts\activate  # On Windows
+    source myenv/bin/activate  # On macOS/Linux
 
 
 Install Dependencies:
-pip install -r requirements.txt
+
+    pip install -r requirements.txt
 
 
 Configure API Key:
 
-Obtain a Groq API key from Groq Console.
-Set the environment variable:setx GROQ_API_KEY "your_api_key_here"  # On Windows (reopen terminal)
-export GROQ_API_KEY="your_api_key_here"  # On macOS/Linux
+    Obtain a Groq API key from Groq Console.
+    Set the environment variable:setx GROQ_API_KEY "your_api_key_here"  # On Windows (reopen terminal)
+    export GROQ_API_KEY="your_api_key_here"  # On macOS/Linux
 
 
-Alternatively, add it to a .env file and load with python-dotenv.
+    Alternatively, add it to a .env file and load with python-dotenv.
 
 
 Download ADGM References:
@@ -60,7 +62,8 @@ Create a samples/ folder and add a test .docx file (e.g., sample_aoa.docx) with 
 Usage
 
 Run the Application:
-streamlit run app.py
+
+    streamlit run app.py
 
 
 Open the displayed URL (e.g., http://localhost:8501) in your browser.
@@ -87,18 +90,29 @@ Download the reviewed file to see comments in Microsoft Word.
 
 
 Project Structure
-corporate-agent/
-├── app.py              # Streamlit UI and main logic
-├── rag_pipeline.py     # RAG setup with Groq and FAISS
-├── document_parser.py  # Document parsing and red flag detection
-├── checklists.py       # ADGM checklists
-├── preprocess_references.py  # Text extraction from references
-├── references/         # ADGM reference documents
-├── reviewed_samples/   # Reviewed .docx files
-├── samples/            # Sample .docx files for testing
-├── requirements.txt    # Python dependencies
-├── README.md           # This file
-└── myenv/              # Virtual environment (optional)
+
+    corporate-agent/
+    ├── app.py              # Streamlit UI and main logic
+    
+    ├── rag_pipeline.py     # RAG setup with Groq and FAISS
+    
+    ├── document_parser.py  # Document parsing and red flag detection
+    
+    ├── checklists.py       # ADGM checklists
+    
+    ├── preprocess_references.py  # Text extraction from references
+    
+    ├── references/         # ADGM reference documents
+    
+    ├── reviewed_samples/   # Reviewed .docx files
+    
+    ├── samples/            # Sample .docx files for testing
+    
+    ├── requirements.txt    # Python dependencies
+    
+    ├── README.md           # This file
+    
+    └── myenv/              # Virtual environment (optional)
 
 
 
