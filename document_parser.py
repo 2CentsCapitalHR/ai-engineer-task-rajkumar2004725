@@ -1,7 +1,7 @@
 from docx import Document as DocxDocument
 import docx2txt
 import re
-import os  # Add this import for directory operations
+import os
 from rag_pipeline import rag_chain
 
 def parse_docx(file_path):
@@ -12,7 +12,7 @@ def parse_docx(file_path):
         headings = [p.text for p in doc.paragraphs if p.style.name.startswith('Heading')]
         return {
             "text": text,
-            "filename": file_path.split('\\')[-1],  # Use \\ for Windows
+            "filename": file_path.split('\\')[-1],
             "headings": headings
         }
     except Exception as e:
@@ -76,21 +76,26 @@ def detect_red_flags(parsed_doc, rag_chain):
     return red_flags
 
 def add_inline_comments(file_path, red_flags):
-    """Add inline comments to the .docx file for detected red flags."""
+    """Add text annotations for red flags at the end of the .docx file."""
     doc = DocxDocument(file_path)
-    for para in doc.paragraphs:
-        text = para.text.lower()
-        for flag in red_flags:
-            if flag["section"].lower() in text or flag["issue"].lower() in text:
-                comment = doc.add_comment(flag["issue"], author="Corporate Agent")
-                comment.add_reply(flag["suggestion"])
-                para.add_comment(comment)
+    if not red_flags:
+        print("No red flags to comment on.")
+        return file_path  # Return original if no changes
     
-    # Ensure the directory exists
+    # Add a "Comments" section at the end
+    comments_section = doc.add_paragraph()
+    comments_section.add_run("=== Comments Section ===").bold = True
+    comments_section.add_run("\nThe following issues were detected:\n")
+
+    for i, flag in enumerate(red_flags, 1):
+        comment_text = f"\n{i}. **Section:** {flag['section']}\n   - **Issue:** {flag['issue']}\n   - **Severity:** {flag['severity']}\n   - **Suggestion:** {flag['suggestion']}\n"
+        comments_section.add_run(comment_text)
+
     output_dir = "reviewed_samples/"
-    os.makedirs(output_dir, exist_ok=True)  # Create directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, f"reviewed_{os.path.basename(file_path)}")
     doc.save(output_path)
+    print(f"Saved reviewed file with annotations to: {output_path}")
     return output_path
 
 # Test block
