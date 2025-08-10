@@ -3,6 +3,7 @@
 
 
 ADGM Corporate Agent
+
 The ADGM Corporate Agent is an AI-powered legal assistant designed to assist with reviewing, validating, and preparing documentation for business incorporation and compliance within the Abu Dhabi Global Market (ADGM) jurisdiction. It accepts .docx documents, verifies completeness based on ADGM rules, highlights red flags, inserts contextual comments, and generates reviewed, downloadable files along with a structured report.
 
 Features
