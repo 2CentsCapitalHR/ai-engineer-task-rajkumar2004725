@@ -1,6 +1,8 @@
 import os
 from langchain_community.embeddings import HuggingFaceEmbeddings  
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
+
+
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
 from langchain_groq import ChatGroq
