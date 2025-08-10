@@ -62,7 +62,9 @@ def detect_red_flags(parsed_doc, rag_chain):
             "severity": "High",
             "suggestion": "Add a signed section with all required parties per ADGM template guidelines."
         })
-    
+
+
+    print("testing rag pipeline for red flags")
     query = f"Based on ADGM regulations, are there any invalid clauses in this text? Text: {text[:1000]}"
     result = rag_chain.invoke({"query": query})
     if "invalid" in result["result"].lower() or "non-compliant" in result["result"].lower():
